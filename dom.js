@@ -13,16 +13,27 @@
 // // console.log(forms[0]);
 // // console.log(document.images);
 // // console.log(document.getElementById('header-title'));
-var headerTitle =document.getElementById('header-title')
-// console.log(headertitle);
-var header = document.getElementById('main-header');
-headerTitle.style.borderBottom = 'solid 3px #000';
+// var headerTitle =document.getElementById('header-title')
+// // console.log(headertitle);
+// var header = document.getElementById('main-header');
+// headerTitle.style.borderBottom = 'solid 3px #000';
+// var items = document.getElementsByClassName('list-group-item');
+// console.log(items);
+// console.log(items[1]);
+// items[1].textContent = 'Hello 2';
+// items[1].style.fontweight = 'bold';
+// items.style.backgroundColor = 'yellow';
+// var titles = document.querySelectorAll('.title');
+// console.log(titles);
+// titles[0].textContent='helloworld';
+
 var items = document.getElementsByClassName('list-group-item');
-console.log(items);
+console.log('items');
 console.log(items[1]);
-items[1].textContent = 'Hello 2';
-items[1].style.fontweight = 'bold';
-items.style.backgroundColor = 'yellow';
-var titles = document.querySelectorAll('.title');
-console.log(titles);
-titles[0].textContent='helloworld'; 
+items[2].textContent = 'Hello2';
+items[2].style.backgroundColor = 'green';
+
+for(var i = 0;i<items.length;i++){
+    items[i].style.fontWeight='bold';
+}
+

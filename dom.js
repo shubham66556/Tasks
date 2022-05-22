@@ -47,17 +47,45 @@
 //     items[i].style.fontWeight='bold';
 // }
 
-var item = document.querySelector('.list-group-item');
-var secondItem = document.querySelector
-('.list-group-item:nth-child(2)');
-secondItem.style.backgroundColor = 'green';
-var thirdItem = document.querySelector
-('.list-group-item:nth-child(3)');
-thirdItem.style.visibility = 'hidden';
+// var item = document.querySelector('.list-group-item');
+// var secondItem = document.querySelector
+// ('.list-group-item:nth-child(2)');
+// secondItem.style.backgroundColor = 'green';
+// var thirdItem = document.querySelector
+// ('.list-group-item:nth-child(3)');
+// thirdItem.style.visibility = 'hidden';
 
-var even = document.querySelectorAll('li:nth-child(even');
+// var even = document.querySelectorAll('li:nth-child(even');
 
-for(var i  =0;i<=2;i++){
+// for(var i  =0;i<=2;i++){
 
-    even[i].style.color = 'green';
-}
+//     even[i].style.color = 'green';
+// }
+// traversing the dom
+
+ var itemlist =document.querySelector('#items');
+// console.log(itemlist.parentNode);
+
+console.log(itemlist.parentElement);
+itemlist.parentElement.style.backgroundColor = '#f4f4f4';
+console.log(itemlist.parentElement.parentElement.parentElement);
+
+console.log(itemlist.firstElementChild);
+itemlist.firstElementChild.textContent='hello 1';
+
+console.log(itemlist.lastChild);
+console.log(itemlist.lastElementChild);
+lastElement.Child.textContent = 'hello 1';
+
+console.log(itemlist.nextSibling);
+console.log(itemlist.nextElementSibling);
+console.log(itemlist.previousSibling);
+console.log(itemlist.previousElementSibling);
+
+itemlist.previousElementSibling.style.color = 'green';
+var newDiv = document.createElement('div');
+newDiv.className='hello';
+newDiv.id='hello1';
+newDiv.setAttribute('title','hello div');
+newDiv.appendChild(newDivtext);
+console.log(newDiv);

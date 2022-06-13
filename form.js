@@ -21,7 +21,7 @@ const obj = {
 
 }
 
-axios.post("https://crudcrud.com/api/83745b7dc7de45909772ecf8c7d95314/data",obj)
+axios.post("https://crudcrud.com/api/9c532d45ed4d4deaa0060b1082cd167a/data",obj)
 .then((response)=>{
     console.log(response)
 })
@@ -29,7 +29,37 @@ axios.post("https://crudcrud.com/api/83745b7dc7de45909772ecf8c7d95314/data",obj)
 .catch((err)=>{
     console.log(err)
 })
-// localStorage.setItem(obj.email, JSON.stringify(obj));
+//  localStorage.setItem(obj.email, JSON.stringify(obj));
+//  shownewuseronscreen(obj)
+
+}
+window.addEventListener("DOMContentLoaded", () => {
+
+    axios.get("https://crudcrud.com/api/9c532d45ed4d4deaa0060b1082cd167a/data")
+    .then((response)=>{
+        console.log(response);
+        for(var i = 0;i<response.data.length;i++){
+            shownewuseronscreen(response.data[i])
+        }
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+    // const localStorageObj = localStorage;
+    // const localstoragekeys  = Object.keys(localStorageObj)
+
+    // for(var i =0; i< localstoragekeys.length; i++){
+    //     const key = localstoragekeys[i]
+    //     const userDetailsString = localStorageObj[key];
+    //     const userDetailsObj = JSON.parse(userDetailsString);
+    //     shownewuseronscreen(userDetailsObj)
+    // }
+})
+
+function shownewuseronscreen(user){
+const parentNode = document.getElementById('users');
+const childHTML = `<li> ${user.user} - ${user.email} </li>`
+parentNode.innerHTML = parentNode.innerHTML+childHTML;
 }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // shownewuseronscreen(obj)

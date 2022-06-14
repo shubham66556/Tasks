@@ -29,8 +29,8 @@ axios.post("https://crudcrud.com/api/9c532d45ed4d4deaa0060b1082cd167a/data",obj)
 .catch((err)=>{
     console.log(err)
 })
-//  localStorage.setItem(obj.email, JSON.stringify(obj));
-//  shownewuseronscreen(obj)
+//   localStorage.setItem(obj.email, JSON.stringify(obj));
+   shownewuseronscreen(obj)
 
 }
 window.addEventListener("DOMContentLoaded", () => {
@@ -45,22 +45,49 @@ window.addEventListener("DOMContentLoaded", () => {
     .catch((error)=>{
         console.log(error);
     })
-    // const localStorageObj = localStorage;
-    // const localstoragekeys  = Object.keys(localStorageObj)
+    const localStorageObj = localStorage;
+    const localstoragekeys  = Object.keys(localStorageObj)
 
-    // for(var i =0; i< localstoragekeys.length; i++){
-    //     const key = localstoragekeys[i]
-    //     const userDetailsString = localStorageObj[key];
-    //     const userDetailsObj = JSON.parse(userDetailsString);
-    //     shownewuseronscreen(userDetailsObj)
-    // }
+    for(var i =0; i< localstoragekeys.length; i++){
+        const key = localstoragekeys[i]
+        const userDetailsString = localStorageObj[key];
+        const userDetailsObj = JSON.parse(userDetailsString);
+        shownewuseronscreen(userDetailsObj)
+    }
 })
 
 function shownewuseronscreen(user){
+
+     document.getElementById('email').value = '';
+      document.getElementById('name').value = '';
+      if(localStorage.getItem(user.email) !== null){
+         removeUserFromScreen(user.email)
+     }
+     
+    // // console.log(localStorage.getItem(user.emailId))
+    // if(localStorage.getItem(user.email) !== null){
+    //     removeUserFromScreen(user.email)
+    // }
+
 const parentNode = document.getElementById('users');
-const childHTML = `<li> ${user.user} - ${user.email} </li>`
+const childHTML = `<li id=${user.email}> ${user.user} - ${user.email}
+<button onclick= deleteUser('${user.email}')> Delete User </button> </li>`
 parentNode.innerHTML = parentNode.innerHTML+childHTML;
 }
+function deleteUser(emailId){
+    console.log(emailId)
+    localStorage.removeItem(emailId);
+    removeUserFromScreen(emailId);
+
+}
+
+ function removeUserFromScreen(emailId){
+     const parentNode = document.getElementById('users');
+     const childNodeToBeDeleted = document.getElementById(emailId);
+     if(childNodeToBeDeleted) {
+        parentNode.removeChild(childNodeToBeDeleted)
+     }
+ }
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // shownewuseronscreen(obj)
 // // // // // // // // // // // // // // // // // // // // // // // // // // // // // // }

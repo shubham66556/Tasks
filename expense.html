@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+</head>
+<body>
+<h2 style="text-align:center;color: tomato;">Expense Tracker</h2>
+
+
+<form onsubmit="saveToLocalStorage(event)">
+    <label> Expense</label>
+            <input id='expenseamount' type="text" name="Chooseexpenseamount" /> <br> <br>
+            <label> description</label>
+            <input id='description' type="description" name="Choosedescription"  required/> <br> <br>
+            <label> Choosecategory</label>
+            <input id='category' type="category" name="Choosecategory"  required/> <br> <br>
+  
+    
+    <input type = "submit" value =Addexpense>
+
+
+
+</form>
+<ul id='expenselist'></ul>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+    <script>
+    function saveToLocalStorage(event) {
+                event.preventDefault();
+                const amount = event.target.Chooseexpenseamount.value;
+                const desc= event.target.Choosedescription.value;
+                const cat = event.target.Choosecategory.value;
+                // localStorage.setItem('name', name);
+                // localStorage.setItem('email', email);
+                // localStorage.setItem('phonenumber', phonenumber)
+                const obj = {
+                   amount,
+                    desc,
+                    cat
+                }
+               
+                axios.post("https://crudcrud.com/api/ed252c907cbd44e7b1db6414f6256553/expense",obj)
+.then((response)=>{
+    console.log(response)
+})
+
+.catch((err)=>{
+    console.log(err)
+})
+// localStorage.setItem(obj.desc, JSON.stringify(obj))
+                showNewUserOnScreen(obj)
+
+            }
+            window.addEventListener("DOMContentLoaded", () => {
+                axios.get("https://crudcrud.com/api/ed252c907cbd44e7b1db6414f6256553/expense")
+    .then((response)=>{
+        console.log(response);
+        for(var i = 0;i<response.data.length;i++){
+            shownewuseronscreen(response.data[i])
+        }
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
+
+
+
+
+                // const localStorageObj = localStorage;
+                // const localstoragekeys  = Object.keys(localStorageObj)
+
+                // for(var i =0; i< localstoragekeys.length; i++){
+                //     const key = localstoragekeys[i]
+                //     const userDetailsString = localStorageObj[key];
+                //     const userDetailsObj = JSON.parse(userDetailsString);
+                //     showNewUserOnScreen(userDetailsObj)
+                // }
+            })
+
+
+            function showNewUserOnScreen(user){
+                document.getElementById('expenseamount').value = '';
+                document.getElementById('description').value = '';
+                document.getElementById('category').value ='';
+                // console.log(localStorage.getItem(user.emailId))
+                // if(localStorage.getItem(user.desc) !== null){
+                //     removeUserFromScreen(user.desc)
+                // }
+                const parentNode = document.getElementById('expenselist');
+                const childHTML = `<li id=${user._id}> ${user.amount} - ${user.desc}
+                    <button onclick=deleteUser('${user._id}')> Delete User </button>
+                                        <button onclick=editUserDetails('${user.desc}','${user.amount}','${user.cat}')>Edit User </button>
+                                        
+                                     </li>`
+
+                parentNode.innerHTML = parentNode.innerHTML + childHTML;
+            }
+            function editUserDetails(amount, desc, cat){
+
+document.getElementById('expenseamount').value = amount;
+document.getElementById('description').value = desc;
+document.getElementById('category').value =cat;
+
+deleteUser(desc)
+
+}
+
+// deleteUser('abc@gmail.com')
+
+function deleteUser(userId){
+    axios.delete(`https://crudcrud.com/api/ed252c907cbd44e7b1db6414f6256553/expense/${userId}`)
+         .then((response)=>{
+            removeUserFromScreen(userId)
+         })
+        .catch((err)=>{
+         console.log(err)
+        })
+
+// console.log(desc)
+// localStorage.removeItem(desc);
+// removeUserFromScreen(desc);
+
+}
+
+function removeUserFromScreen(userId){
+const parentNode = document.getElementById('expenselist');
+const childNodeToBeDeleted = document.getElementById(userId);
+if(childNodeToBeDeleted) {
+    parentNode.removeChild(childNodeToBeDeleted)
+}
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

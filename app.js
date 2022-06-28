@@ -20,7 +20,7 @@ res.end();
         res.write('<html>');
 res.write('<head><title>My first page</title><head>');
 res.write('<body><h1>welcome to my node js project</h1></body>');
-res.write('</html>')
+res.write('</html>');
 res.end();
     }
 

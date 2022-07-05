@@ -2,18 +2,15 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+
+const adminRoutes = require('./routes/admin');
 app.use(bodyParser.urlencoded({extended:false}));
-app.use('/add-product',(req,res,next)=>{
-console.log('In another middleware');
-res.send('<form action = "/product" method = POST><input type="text" name = "title"><button type = "submit">Add product</button><input type="text" name = "title"><button type = "submit">Input size</form>');
+app.use(adminRoutes);
+app.use(shopRoutes);
+app.use((req,res,next)=>{
+res.status(404).send('<h1>page not found</h1>');
 
 })
-
-app.use('/product',(req,res,next)=>{
-    console.log(req.body);
-res.redirect('/');
-
-});
 const server = http.createServer(app);
     
 
